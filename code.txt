@@ -1,0 +1,53 @@
+ssh <username>@<ip>
+sudo apt-get update
+sudo apt-get upgrade
+
+- mở cửa sổ  cmd mới:
+
+scp file path username@ip:/home/user/
+
+- tắt cửa sổ này đi
+
+sudo apt-get install unzip
+sudo apt-get install nginx
+sudo apt-get install guniconr
+
+
+unzip ten_file_moi_up_len
+
+cd ten_file_moi_giai_nen
+
+sudo apt-get install python3.12-venv
+
+python3 -m ~/env/ten_venv
+
+source ~/env/ten_venv/bin/activate
+
+gunicorn --bind 0.0.0.0 --timeout 600 main:app
+
+deactivate
+
+sudo vim /etc/systemd/system/main.service
+
+sudo systemctl start main
+sudo systemctl enable main
+sudo systemctl status main
+
+sudo vim /etc/nginx/sites-available/main.conf
+
+sudo ln -s /etc/nginx/sites-available/main.conf /etc/nginx/sites-enabled/
+
+sudo vim /etc/nginx/nginx.conf
+
+server_names_hash_bucket_size 128;
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+sudo ufw enbale
+sudo ufw allow "Nginx Full"
+sudo ufw status
+
+sudo chmod 775 /home/user
+

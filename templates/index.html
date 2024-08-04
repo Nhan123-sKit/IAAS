@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BDU Translate App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function countWords(str) {
+            return str.trim().split(/\s+/).length;
+        }
+        
+        function updateWordCount() {
+            var text = document.getElementById('input-text').value;
+            var wordCount = countWords(text);
+            var limit = 100;
+            document.getElementById('word-count').innerText = wordCount + '/' + limit;
+            
+            if (wordCount > limit) {
+                document.getElementById('input-text').value = text.split(/\s+/).slice(0, limit).join(' ');
+                updateWordCount();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>BDU Translate App</h1>
+        <form method="POST">
+            <div class="language-options">
+                <div class="source-language">
+                    <label for="source_language">From:</label>
+                    <select name="source_language" id="source_language">
+                        <option value="vi">Tiếng Việt</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="target-language">
+                    <label for="target_language">To:</label>
+                    <select name="target_language" id="target_language">
+                        <option value="en">English</option>
+                        <option value="vi">Tiếng Việt</option>
+                    </select>
+                </div>
+            </div>
+            <div class="translation-container">
+                <div class="input-container">
+                    <textarea id="input-text" name="text" placeholder="Nhập văn bản cần dịch" required onInput="updateWordCount()"></textarea>
+                    <div id="word-count">0/100</div>
+                </div>
+                <div class="output-container">
+                    <div class="result">
+                        {% if translated_text %}
+                            <p>{{ translated_text }}</p>
+                        {% else %}
+                            <p>Không có kết quả.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Dịch</button>
+        </form>
+    </div>
+</body>
+</html>

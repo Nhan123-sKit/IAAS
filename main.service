@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve main Flask app
+After=network.target
+
+[Service]
+User=nhan
+Group=www-data
+WorkingDirectory=/home/nhan/bdutranslate_IaaS_Linux
+Environment="PATH=/home/nhan/env/linuxIaaS/bin"
+ExecStart=/home/nhan/env/bdutranslate/bin/gunicorn --workers 3 --bind unix:main.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
